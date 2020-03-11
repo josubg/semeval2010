@@ -1,0 +1,4 @@
+directory: corpora/test/it/auto
+extension: enaf
+config:
+  - [configurations/arguments/it/parse.yaml]

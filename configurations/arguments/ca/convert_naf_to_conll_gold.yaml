@@ -1,0 +1,6 @@
+language: ca
+encoding: utf-8
+chain: [naf_to_conll]
+output: .gold_conll
+step:
+    - [naf_to_conll, "java -jar ../ixa-pipe-convert/target/ixa-pipe-convert-0.1.0.jar --nafToCoNLL2012 {file_name} --CoNLLfilterNER --CoNLLnormalizeForm --StreamOutput --StreamInput --partSeparator $"]

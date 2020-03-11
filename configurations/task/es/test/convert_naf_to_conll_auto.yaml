@@ -1,0 +1,4 @@
+directory: corpora/test/es/auto
+extension: naf
+config:
+  - [configurations/arguments/es/convert_naf_to_conll_auto.yaml]

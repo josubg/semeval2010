@@ -1,0 +1,4 @@
+directory: corpora/test/es/gold
+extension: freeling_gold
+config:
+  - [configurations/arguments/evaluate_freeling_es_gold.yaml]

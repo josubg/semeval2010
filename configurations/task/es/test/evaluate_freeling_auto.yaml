@@ -1,0 +1,4 @@
+directory: corpora/test/es/auto
+extension: freeling_auto
+config:
+  - [configurations/arguments/evaluate_freeling_es_auto.yaml]

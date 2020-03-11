@@ -1,0 +1,7 @@
+language: it
+encoding: utf-8
+output: .pnaf
+chain: [ixa_pos, ixa_parse]
+step:
+    - [ixa_parse, "java -jar ../repos-ixa/ixa-pipe-parse/target/ixa-pipe-parse-1.1.2-exec.jar parse -m ../repos-ixa/ixa-pipe-parse/tutpenn-models-evalita2011/parse-models/it-evalita11-parse.bin --headFinder sem --language it"]
+    - [ixa_pos, "java -jar ../ixa-pipes-1.1.1/ixa-pipe-pos-1.5.1-exec.jar tag -m ../repos-ixa/ixa-pipe-parse/tutpenn-models-evalita2011/morph-models-1.5.0/it/it-pos-evalita2011.bin  -lm ../ixa-pipes-1.1.1/ud-morph-models-1.5.0/it/it-lemma-perceptron-ud.bin -l it"]

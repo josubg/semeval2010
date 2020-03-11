@@ -1,0 +1,6 @@
+anguage: es
+encoding: utf-8
+chain: [naf_to_freeling]
+output: .auto_freeling
+step:
+    - [naf_to_freeling, "java -jar ../ixa-pipe-convert/target/ixa-pipe-convert-0.1.0.jar --nafToFreeling {file_name}  --freeling_level TAGGED  --StreamOutput  --StreamInput --partSeparator $"]

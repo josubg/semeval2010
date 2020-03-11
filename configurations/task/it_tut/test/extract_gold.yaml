@@ -1,0 +1,3 @@
+file: corpora/test/it.test.txt
+config:
+  - [configurations/arguments/it/test/extract_gold.yaml]

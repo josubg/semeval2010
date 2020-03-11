@@ -1,0 +1,4 @@
+directory: corpora/test/ca/gold
+extension: naf
+config:
+  - [configurations/arguments/ca/convert_naf_to_conll_gold.yaml]

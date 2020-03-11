@@ -1,0 +1,4 @@
+directory: corpora/training/es/auto
+extension: pnaf
+config:
+  - [configurations/arguments/es/join.yaml]

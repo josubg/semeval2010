@@ -1,0 +1,3 @@
+file: corpora/training/ca.train.txt
+config:
+  - [configurations/arguments/ca/training/extract_auto.yaml]

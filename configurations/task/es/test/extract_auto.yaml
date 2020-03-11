@@ -1,0 +1,3 @@
+file: corpora/test/es.test.txt
+config:
+  - [configurations/arguments/es/test/extract_auto.yaml]

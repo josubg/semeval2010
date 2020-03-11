@@ -1,0 +1,4 @@
+directory: corpora/training/ca/auto
+extension: naf
+config:
+  - [configurations/arguments/ca/convert_naf_to_conll_auto.yaml]

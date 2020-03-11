@@ -1,0 +1,4 @@
+directory: corpora/training/it/gold
+extension: pnaf
+config:
+  - [configurations/arguments/it/join.yaml]

@@ -1,0 +1,4 @@
+directory: corpora/training/es/auto
+extension: naf
+config:
+  - [configurations/arguments/convert_naf_to_freeling_es_auto.yaml]

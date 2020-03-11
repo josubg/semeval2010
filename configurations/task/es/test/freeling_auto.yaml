@@ -1,0 +1,4 @@
+directory: corpora/test/es/auto
+extension: jnaf
+config:
+  - [configurations/arguments/freeling_es_auto]

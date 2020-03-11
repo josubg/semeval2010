@@ -1,0 +1,37 @@
+echo ===V8 
+echo =GOLD CLOSED
+echo relax
+sh eval_v8.sh es_test_gold.conll relaxcor/closed/gold/es.txt.conll
+echo sucre
+sh eval_v8.sh es_test_gold.conll sucre/closed/gold/es.txt.conll
+echo tanl-1
+sh eval_v8.sh es_test_gold.conll tanl-1/closed/gold/es.txt.conll
+echo ubui
+sh eval_v8.sh es_test_gold.conll ubiu/closed/gold/es.txt.conll
+echo AUTO CLOSED
+echo sucre
+sh eval_v8.sh es_test_gold.conll sucre/closed/regular/es.txt.conll
+echo tanl-1
+sh eval_v8.sh es_test_gold.conll tanl-1/closed/regular/es.txt.conll
+echo ubui
+sh eval_v8.sh es_test_gold.conll ubiu/closed/regular/es.txt.conll
+
+echo ===OFFICIAL 
+echo =GOLD CLOSED
+echo relax
+sh eval_official.sh /home/josubg/remote/semeval2010/results/es_test_gold.conll /home/josubg/remote/semeval2010/results/relaxcor/closed/gold/es.txt.conll
+echo sucre
+sh eval_official.sh /home/josubg/remote/semeval2010/results/es_test_gold.conll /home/josubg/remote/semeval2010/results/sucre/closed/gold/es.txt.conll
+echo tanl-1
+sh eval_official.sh /home/josubg/remote/semeval2010/results/es_test_gold.conll /home/josubg/remote/semeval2010/results/tanl-1/closed/gold/es.txt.conll
+echo ubui
+sh eval_official.sh /home/josubg/remote/semeval2010/results/es_test_gold.conll /home/josubg/remote/semeval2010/results/ubiu/closed/gold/es.txt.conll
+echo AUTO CLOSED
+echo sucre
+sh eval_official.sh /home/josubg/remote/semeval2010/results/es_test_gold.conll /home/josubg/remote/semeval2010/results/sucre/closed/regular/es.txt.conll
+echo tanl-1
+sh eval_official.sh /home/josubg/remote/semeval2010/results/es_test_gold.conll /home/josubg/remote/semeval2010/results/tanl-1/closed/regular/es.txt.conll
+echo ubui
+sh eval_official.sh /home/josubg/remote/semeval2010/results/es_test_gold.conll /home/josubg/remote/semeval2010/results/ubiu/closed/regular/es.txt.conll
+
+

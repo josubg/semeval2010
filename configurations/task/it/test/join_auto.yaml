@@ -1,0 +1,4 @@
+directory: corpora/test/it/auto
+extension: pnaf
+config:
+  - [configurations/arguments/it/join.yaml]

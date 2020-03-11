@@ -1,0 +1,4 @@
+directory: corpora/training/es/gold
+extension: naf
+config:
+  - [configurations/arguments/es/convert_naf_to_conll_gold.yaml]

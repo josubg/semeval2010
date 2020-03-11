@@ -1,0 +1,6 @@
+language: es
+encoding: utf-8
+output: .naf
+chain: [join]
+step:
+    - [join, "python3 script/process/join_files.py --file_name {file_name} --encoding {options.encoding}"]

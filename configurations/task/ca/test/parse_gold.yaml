@@ -1,0 +1,4 @@
+directory: corpora/test/ca/gold
+extension: enaf
+config:
+  - [configurations/arguments/ca/parse.yaml]

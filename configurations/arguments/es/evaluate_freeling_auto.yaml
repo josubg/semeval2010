@@ -1,0 +1,7 @@
+language: es
+encoding: utf-8
+chain: [freeling_coref, freeling_to_conll]
+output: .auto_freeling_response
+step:
+    - [freeling_coref, "analyze -f /usr/local/share/freeling/config/es_semeval.cfg"]
+    - [freeling_to_conll, "python script/freeling_to_conll.py --file {file_name}"]
