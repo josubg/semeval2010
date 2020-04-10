@@ -6,7 +6,7 @@ import sys
 import argparse
 import subprocess
 
-CLEAR ='\x1b[0m'
+CLEAR = '\x1b[0m'
 RED = '\x1b[1;34;0m'
 YELLOW = '\x1b[1;33;0m'
 GREEN = '\x1b[1;32;0m'
@@ -25,15 +25,15 @@ def parse_cmd_arguments():
         choices=["open", "closed"],
         help="Language to process")
     parser.add_argument(
-        '--system', dest='systems',  nargs='*', default=["relaxcor", "sucre", "tanl-1", "ubiu"],
-        choices=["relaxcor", "sucre", "tanl-1", "ubiu"],
+        '--system', dest='systems',  nargs='*', default=["relaxcor", "sucre", "tanl-1", "ubiu", "bart"],
+        choices=["relaxcor", "sucre", "tanl-1", "ubiu", "bart", "corry-b", "corry-c", "corry-m"],
         help="Language to process")
     parser.add_argument(
         '--annotation', dest='annotations', nargs='*', default=["gold", "regular"],
         choices=["gold", "regular"],
         help="Language to process")
     parser.add_argument(
-        '--script', dest='scripts',  nargs='*', default=["v8", "semeval_official"],
+        '--script', dest='scripts',  nargs='*', default=["v8"],
         choices=["v8", "semeval_official"],
         help="Language to process")
     parser.add_argument(
@@ -92,22 +92,25 @@ def evaluate_system(metrics, origin, destiny, prefix):
             results[metric, "F1"] = float(tokens[f1_index].split(" ")[-1])
             with open(prefix + "{}_evaluation.txt".format(metric), "w") as eval_file:
                 eval_file.write(evaluation)
-
     return results, error
 
 
-def calculate_semeval(results):
+def calculate_mean(results, label):
     try:
-        results[("semeval", "R")] = ((results[("muc", "R")] + results[("bcub", "R")] + results[("ceafm", "R")]) / 3)
-        results[("semeval", "P")] = ((results[("muc", "P")] + results[("bcub", "P")] + results[("ceafm", "P")]) / 3)
-        results[("semeval", "F1")] = ((results[("muc", "F1")] + results[("bcub", "F1")] + results[("ceafm", "F1")]) / 3)
+        results[(label, "R")] = ((results[("muc", "R")] + results[("bcub", "R")] + results[("ceafm", "R")]) / 3)
+        results[(label, "P")] = ((results[("muc", "P")] + results[("bcub", "P")] + results[("ceafm", "P")]) / 3)
+        results[(label, "F1")] = ((results[("muc", "F1")] + results[("bcub", "F1")] + results[("ceafm", "F1")]) / 3)
         return False
     except KeyError:
-        results[("semeval", "R")] = float("NaN")
-        results[("semeval", "P")] = float("NaN")
-        results[("semeval", "F1")] = float("NaN")
-        print("Error at Semeval ", end='')
+        results[(label, "R")] = float("NaN")
+        results[(label, "P")] = float("NaN")
+        results[(label, "F1")] = float("NaN")
+        print("Error at mean ", end='')
         return True
+
+
+def table_inner_head(title, flat_metric):
+    return "| {} | ".format(title) + " | ".join("   " for m in flat_metric) + " |\n"
 
 
 def process(languages, information, annotations, systems, scripts, results_path, gold_path, metrics):
@@ -119,10 +122,12 @@ def process(languages, information, annotations, systems, scripts, results_path,
         with open("preface.md") as pref:
             for script in scripts:
                 output.writelines(pref.readlines())
+                output.write(header(metrics))
                 for language in languages:
                     shutil.rmtree(os.path.join("log", language), ignore_errors=True)
                     os.makedirs(os.path.join("log", language))
-                    output.write("#### Language {}\n".format(language))
+                    # output.write("#### Language {}\n".format(language))
+                    output.write(table_inner_head("Language: {} ".format(language), flat_metric))
                     print("Language {}".format(language))
                     for annotation in annotations:
                         origin = os.path.join(results_path, language) + "_test_auto.conll"
@@ -135,21 +140,23 @@ def process(languages, information, annotations, systems, scripts, results_path,
                             results = {}
                             for system in systems:
                                 print("\t\t{:.<15}...".format(system), end='')
-                                destiny = os.path.join(gold_path, system, inf, annotation, language) + ".txt.conll"
+                                destiny = os.path.join(gold_path, system, inf, annotation, language) + ".conll"
                                 if not os.path.exists(destiny):
                                     print("{:.>15}".format(YELLOW+"Not reported " + CLEAR))
                                 else:
                                     prefix = "log/{}/{}_{}_{}".format(language, inf, annotation, system)
                                     results[system], error = evaluate_system(metrics, origin, destiny, prefix)
-                                    error |= calculate_semeval(results[system])
+                                    error |= calculate_mean(results[system], "semeval")
                                     if error:
                                         print("{:.>15}".format(RED + "Error" + CLEAR))
                                     else:
-
                                         print("{:.>15}".format(GREEN + "Processed" + CLEAR))
                             if results:
-                                output.write("##### Information: {} annotation: {}\n".format(inf, annotation))
-                                output.write(header(metrics))
+                                output.write(
+                                    table_inner_head("Information: {} annotation: {}"
+                                                     .format(inf, annotation), flat_metric))
+                                # output.write("##### Information: {} annotation: {}\n".format(inf, annotation))
+                                # output.write(header(metrics))
                                 for system, system_results in results.items():
                                     output.write(
                                         "| {} | ".format(system) +

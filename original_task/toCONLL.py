@@ -12,7 +12,7 @@ for path, dirs, files in walk(path):
             name = join(path, f)
             print("Processing: " + name)
             with open(name, "r") as indoc:
-                with open(name+".conll", 'w') as outdoc:
+                with open(name[:-len(ext)]+".conll", 'w') as outdoc:
                     for line in indoc:
                         if line != "\n":
                             if line.startswith("#begin"):
