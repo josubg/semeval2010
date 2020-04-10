@@ -18,7 +18,7 @@ def parse_cmd_arguments():
     parser = argparse.ArgumentParser(
         description="Process a CONLL file into a kaf one")
     parser.add_argument(
-        '--language',  dest='languages',  nargs='*', default=["es", "it", "ca"],
+        '--language',  dest='languages',  nargs='*', default=["ca", "es", "it", ],
         help="Language to process")
     parser.add_argument(
         '--information', dest='information',  nargs='*', default=["open", "closed"],
@@ -138,6 +138,9 @@ def process(languages, information, annotations, systems, scripts, results_path,
                             print("\tsection:    " + WHITE + "{:>8}".format(inf) + CLEAR)
                             print("\tannotation: " + WHITE + "{:>8}".format(annotation) + CLEAR)
                             results = {}
+                            output.write(
+                                table_inner_head("Information: {}, Annotation: {}"
+                                                 .format(inf, annotation), flat_metric))
                             for system in systems:
                                 print("\t\t{:.<15}...".format(system), end='')
                                 destiny = os.path.join(gold_path, system, inf, annotation, language) + ".conll"
@@ -151,16 +154,10 @@ def process(languages, information, annotations, systems, scripts, results_path,
                                         print("{:.>15}".format(RED + "Error" + CLEAR))
                                     else:
                                         print("{:.>15}".format(GREEN + "Processed" + CLEAR))
-                            if results:
-                                output.write(
-                                    table_inner_head("Information: {} annotation: {}"
-                                                     .format(inf, annotation), flat_metric))
-                                # output.write("##### Information: {} annotation: {}\n".format(inf, annotation))
-                                # output.write(header(metrics))
-                                for system, system_results in results.items():
+
                                     output.write(
                                         "| {} | ".format(system) +
-                                        " | ".join("{0:.2f}".format(system_results[m]) for m in flat_metric) +
+                                        " | ".join("{0:.2f}".format(results[system][m]) for m in flat_metric) +
                                         " |\n")
 
 
