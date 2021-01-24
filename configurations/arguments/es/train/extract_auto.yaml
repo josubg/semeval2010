@@ -1,0 +1,6 @@
+language: es
+encoding: utf-8
+chain: [semeval_to_naf]
+# No StdOut is produced
+step:
+    - [semeval_to_naf, "python3 script/process/extract_from_files.py -l {options.language} -e {options.encoding} --extract_text txt --output_ext enaf --dtd naf.dtd --output_dir corpora/train/{options.language}/auto/ --annotation auto"]

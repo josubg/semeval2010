@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # coding=utf-8
 """ Extract form a Conll corpus the original text separated by parts.
 arguments :  config_subdirectory corpus_group corpus

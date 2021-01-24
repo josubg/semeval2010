@@ -1,4 +1,4 @@
-directory: corpora/training/ca/auto
+directory: corpora/train/ca/auto
 extension: pnaf
 config:
   - [configurations/arguments/ca/join.yaml]

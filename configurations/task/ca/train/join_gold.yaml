@@ -1,4 +1,4 @@
-directory: corpora/training/ca/gold
+directory: corpora/train/ca/gold
 extension: pnaf
 config:
   - [configurations/arguments/ca/join.yaml]

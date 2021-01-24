@@ -1,4 +1,4 @@
-directory: corpora/training/it/auto
+directory: corpora/train/it/auto
 extension: enaf
 config:
   - [configurations/arguments/it/parse.yaml]

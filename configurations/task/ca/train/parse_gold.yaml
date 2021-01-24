@@ -1,4 +1,4 @@
-directory: corpora/training/ca/gold
+directory: corpora/train/ca/gold
 extension: enaf
 config:
   - [configurations/arguments/ca/parse.yaml]

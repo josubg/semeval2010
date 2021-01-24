@@ -33,7 +33,7 @@ def parse_cmd_arguments():
         choices=["gold", "regular"],
         help="Language to process")
     parser.add_argument(
-        '--script', dest='scripts',  nargs='*', default=["v8"],
+        '--script', dest='scripts',  nargs='*', default=["../conll-scorer/v8.01/scorer.pl"],
         choices=["v8", "semeval_official"],
         help="Language to process")
     parser.add_argument(
@@ -55,7 +55,7 @@ def header(metrics):
         '| ' + ' | '.join(["system"] + ["R", "P", "F1"] * 6) + ' |\n'
 
 
-def evaluate_system(metrics, origin, destiny, prefix):
+def evaluate_system(script, metrics, origin, destiny, prefix):
     error = False
     results = {}
     for metric in metrics:
@@ -65,7 +65,7 @@ def evaluate_system(metrics, origin, destiny, prefix):
         else:
             m = metric
         p = subprocess.Popen(
-           ["perl",  "./scorer/v8.01/scorer.pl",  m,  origin, destiny],
+           ["perl",  script,  m,  origin, destiny],
            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         pipe, err = p.communicate()
         if err:
@@ -148,7 +148,7 @@ def process(languages, information, annotations, systems, scripts, results_path,
                                     print("{:.>15}".format(YELLOW+"Not reported " + CLEAR))
                                 else:
                                     prefix = "log/{}/{}_{}_{}".format(language, inf, annotation, system)
-                                    results[system], error = evaluate_system(metrics, origin, destiny, prefix)
+                                    results[system], error = evaluate_system(script, metrics, origin, destiny, prefix)
                                     error |= calculate_mean(results[system], "semeval")
                                     if error:
                                         print("{:.>15}".format(RED + "Error" + CLEAR))

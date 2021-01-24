@@ -1,3 +1,3 @@
 file: corpora/it.train.txt
 config:
-  - [configurations/arguments/training/extract_gold.yaml]
+  - [configurations/arguments/train/extract_gold.yaml]

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # coding=utf-8
 """ A script to ease the process of a corpus into a series of tool chains.
 Specially useful for serial experiment.
